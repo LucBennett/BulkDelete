@@ -1,0 +1,50 @@
+{
+  "extensionName": {
+    "message": "EliminaciónMasiva",
+    "description": "El nombre de la extensión de correo de Thunderbird"
+  },
+  "extensionDescription": {
+    "message": "Extensión de Thunderbird para eliminar correos electrónicos en masa.",
+    "description": "La descripción de la extensión de correo de Thunderbird"
+  },
+  "deleteOneButton": {
+    "message": "Solo este",
+    "description": "Botón para eliminar solo el correo electrónico actual"
+  },
+  "deleteAllNameAddrButton": {
+    "message": "Todos del remitente:",
+    "description": "Botón para eliminar todos los correos electrónicos de un remitente específico"
+  },
+  "deleteAllAddrButton": {
+    "message": "Todos de la dirección:",
+    "description": "Botón para eliminar todos los correos electrónicos de una dirección"
+  },
+  "deleteAllDomainButton": {
+    "message": "Todos del dominio:",
+    "description": "Botón para eliminar todos los correos electrónicos de un dominio"
+  },
+  "statusTextWorking": {
+    "message": "Trabajando...",
+    "description": "Texto de estado para el estado en proceso"
+  },
+  "statusTextDone": {
+    "message": "Hecho",
+    "description": "Texto de estado para el estado completado"
+  },
+  "statusTextError": {
+    "message": "Error",
+    "description": "Texto de estado para el estado de error"
+  },
+  "statusTextDeleting": {
+    "message": "Eliminando correo(s)...",
+    "description": "Texto de estado mientras se eliminan los correos electrónicos"
+  },
+  "statusTextDeleteSuccess": {
+    "message": "Correo(s) eliminado(s) con éxito.",
+    "description": "Texto de estado para la eliminación exitosa de correos electrónicos"
+  },
+  "statusTextDeleteError": {
+    "message": "No se pudo eliminar el/los correo(s).",
+    "description": "Texto de estado cuando falla la eliminación de correos electrónicos"
+  }
+}

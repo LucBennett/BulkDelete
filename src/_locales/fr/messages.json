@@ -1,0 +1,50 @@
+{
+  "extensionName": {
+    "message": "SuppressionEnMasse",
+    "description": "Le nom de l'extension MailExtension de Thunderbird"
+  },
+  "extensionDescription": {
+    "message": "Extension Thunderbird pour supprimer des e-mails en masse.",
+    "description": "La description de l'extension MailExtension de Thunderbird"
+  },
+  "deleteOneButton": {
+    "message": "Seulement celui-ci",
+    "description": "Bouton pour supprimer uniquement l'e-mail actuel"
+  },
+  "deleteAllNameAddrButton": {
+    "message": "Tous de l'expéditeur :",
+    "description": "Bouton pour supprimer tous les e-mails d'un expéditeur spécifique"
+  },
+  "deleteAllAddrButton": {
+    "message": "Tous de l'adresse :",
+    "description": "Bouton pour supprimer tous les e-mails d'une adresse"
+  },
+  "deleteAllDomainButton": {
+    "message": "Tous du domaine :",
+    "description": "Bouton pour supprimer tous les e-mails d'un domaine"
+  },
+  "statusTextWorking": {
+    "message": "En cours...",
+    "description": "Texte d'état pour l'état en cours de traitement"
+  },
+  "statusTextDone": {
+    "message": "Terminé",
+    "description": "Texte d'état pour l'état terminé"
+  },
+  "statusTextError": {
+    "message": "Erreur",
+    "description": "Texte d'état pour l'état d'erreur"
+  },
+  "statusTextDeleting": {
+    "message": "Suppression des e-mails...",
+    "description": "Texte d'état pendant la suppression des e-mails"
+  },
+  "statusTextDeleteSuccess": {
+    "message": "E-mail(s) supprimé(s) avec succès.",
+    "description": "Texte d'état pour la suppression réussie des e-mails"
+  },
+  "statusTextDeleteError": {
+    "message": "Échec de la suppression des e-mails.",
+    "description": "Texte d'état lorsque la suppression des e-mails échoue"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "name": "__MSG_extensionName__",
+  "description": "__MSG_extensionDescription__",
+  "version": "0.1.0",
+  "default_locale": "en",
+  "author": "Luc Bennett",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{7a43661d-9ce4-4693-9dbd-f68cfc673618}",
+      "strict_min_version": "115.0"
+    }
+  },
+  "permissions": [
+    "accountsRead",
+    "messagesRead",
+    "messagesDelete",
+    "messagesMove",
+    "theme"
+  ],
+  "icons": {
+    "48": "icons/icon48.png",
+    "64": "icons/icon64.png"
+  },
+  "message_display_action": {
+    "default_title": "__MSG_extensionName__",
+    "default_icon": "icons/bulk-delete-emails.png",
+    "default_popup": "popup.html",
+    "theme_icons": [
+      {
+        "light": "icons/icon48_inverted.png",
+        "dark": "icons/icon48.png",
+        "size": 48
+      },
+      {
+        "light": "icons/icon64_inverted.png",
+        "dark": "icons/icon64.png",
+        "size": 64
+      }
+    ]
+  },
+  "manifest_version": 2
+}

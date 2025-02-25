@@ -1,0 +1,50 @@
+{
+  "extensionName": {
+    "message": "BulkDelete",
+    "description": "Der Name der Thunderbird-Mailerweiterung"
+  },
+  "extensionDescription": {
+    "message": "Thunderbird-Erweiterung zum massenhaften Löschen von E-Mails.",
+    "description": "Die Beschreibung der Thunderbird-Mailerweiterung"
+  },
+  "deleteOneButton": {
+    "message": "Nur diese",
+    "description": "Schaltfläche zum Löschen nur der aktuellen E-Mail"
+  },
+  "deleteAllNameAddrButton": {
+    "message": "Alle vom Absender:",
+    "description": "Schaltfläche zum Löschen aller E-Mails von einem bestimmten Absender"
+  },
+  "deleteAllAddrButton": {
+    "message": "Alle von Adresse:",
+    "description": "Schaltfläche zum Löschen aller E-Mails von einer bestimmten Adresse"
+  },
+  "deleteAllDomainButton": {
+    "message": "Alle von Domain:",
+    "description": "Schaltfläche zum Löschen aller E-Mails von einer Domain"
+  },
+  "statusTextWorking": {
+    "message": "Arbeitet...",
+    "description": "Statusmeldung für den Arbeitszustand"
+  },
+  "statusTextDone": {
+    "message": "Fertig",
+    "description": "Statusmeldung für den abgeschlossenen Zustand"
+  },
+  "statusTextError": {
+    "message": "Fehler",
+    "description": "Statusmeldung für den Fehlerzustand"
+  },
+  "statusTextDeleting": {
+    "message": "E-Mail(s) werden gelöscht...",
+    "description": "Statusmeldung während des Löschens von E-Mails"
+  },
+  "statusTextDeleteSuccess": {
+    "message": "E-Mail(s) erfolgreich gelöscht.",
+    "description": "Statusmeldung für erfolgreiches Löschen von E-Mails"
+  },
+  "statusTextDeleteError": {
+    "message": "Löschen der E-Mail(s) fehlgeschlagen.",
+    "description": "Statusmeldung, wenn das Löschen von E-Mails fehlschlägt"
+  }
+}

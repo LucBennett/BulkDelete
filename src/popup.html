@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title data-i18n="extensionName">BulkDelete</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="button-stack">
+      <button id="deleteOneButton" data-i18n="deleteOneButton">
+        Delete just this
+      </button>
+      <button id="deleteAllNameAddrButton" data-i18n="deleteAllNameAddrButton">
+        Delete all from name-addr
+      </button>
+      <button id="deleteAllAddrButton" data-i18n="deleteAllAddrButton">
+        Delete all from addr-spec
+      </button>
+      <button id="deleteAllDomainButton" data-i18n="deleteAllDomainButton">
+        Delete all from domain
+      </button>
+    </div>
+
+    <h4 id="statusText" role="status"></h4>
+
+    <script src="i18n.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>
