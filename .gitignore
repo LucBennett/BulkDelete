@@ -1,4 +1,6 @@
-# Ignore build directory
+*.iml
+
+#Ignore build directory
 build/
 
 # Ignore other common directories and files

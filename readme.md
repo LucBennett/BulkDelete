@@ -1,4 +1,4 @@
-# BulkDelete - Thunderbird MailExtension
+# ![icon](src/icons/icon48_inverted.png) BulkDelete
 
 BulkDelete is a **Thunderbird MailExtension** that allows you to efficiently bulk delete emails using multiple filtering options. Whether you need to remove just one email or clean up your inbox by sender, address, or domain, BulkDelete makes it easy.
 
