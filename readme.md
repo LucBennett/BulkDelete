@@ -11,6 +11,15 @@ BulkDelete provides four powerful deletion options:
 3. **Delete all emails from a sender’s address** – Removes all emails from an exact email address (e.g., `john@example.com`).
 4. **Delete all emails from a domain** – Clears all emails from a specific domain (e.g., `@example.com`).
 
+### **Enhanced Deletion Scope Control**
+
+The deletion feature now includes a dropdown menu that allows users to refine the scope of message deletion. Users can choose to:
+
+- Delete messages only from the **current folder**.
+- Delete messages from **all folders within the current account**.
+- Delete messages from **all folders across all accounts**.
+- **Include or exclude** messages in Spam and Trash folders for greater control.
+
 ## Download
 
 You can download the latest version of BulkDelete [here](https://github.com/LucBennett/BulkDelete/releases/latest).
