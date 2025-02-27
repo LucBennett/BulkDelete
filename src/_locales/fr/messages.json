@@ -1,11 +1,11 @@
 {
   "extensionName": {
     "message": "SuppressionEnMasse",
-    "description": "Le nom de l'extension MailExtension de Thunderbird"
+    "description": "Le nom de l'extension Thunderbird MailExtension"
   },
   "extensionDescription": {
     "message": "Extension Thunderbird pour supprimer des e-mails en masse.",
-    "description": "La description de l'extension MailExtension de Thunderbird"
+    "description": "La description de l'extension Thunderbird MailExtension"
   },
   "deleteOneButton": {
     "message": "Seulement celui-ci",
@@ -46,5 +46,29 @@
   "statusTextDeleteError": {
     "message": "Échec de la suppression des e-mails.",
     "description": "Texte d'état lorsque la suppression des e-mails échoue"
+  },
+  "deletionScope": {
+    "message": "Portée de suppression",
+    "description": "Titre de la section où les utilisateurs sélectionnent la portée de la suppression."
+  },
+  "currentFolderLabel": {
+    "message": "Dossier actuel",
+    "description": "Libellé pour l'option de portée de suppression qui restreint la suppression au dossier actuel."
+  },
+  "currentAccountLabel": {
+    "message": "Compte actuel",
+    "description": "Libellé pour l'option de portée de suppression qui restreint la suppression au compte actuel."
+  },
+  "allFoldersLabel": {
+    "message": "Tous les dossiers",
+    "description": "Libellé pour l'option de portée de suppression qui supprime les messages de tous les dossiers."
+  },
+  "includeTrash": {
+    "message": "Inclure la Corbeille",
+    "description": "Libellé de case à cocher indiquant si les dossiers de la Corbeille doivent être inclus dans le processus de suppression."
+  },
+  "includeSpam": {
+    "message": "Inclure le Spam",
+    "description": "Libellé de case à cocher indiquant si les dossiers de Spam doivent être inclus dans le processus de suppression."
   }
 }

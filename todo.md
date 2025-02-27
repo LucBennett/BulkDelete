@@ -8,4 +8,4 @@
   - [x] French
   - [x] German
 - [x] Push to github
-- [ ] Submit to Thunderbird
+- [x] Submit to Thunderbird

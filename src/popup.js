@@ -1,3 +1,4 @@
+// @ts-check
 /**
  * BulkDelete Popup Script
  * Provides custom logging, email parsing, and message deletion functions.
@@ -33,10 +34,6 @@ function appendButtonText(element, text) {
   element.appendChild(document.createTextNode(text));
 }
 
-/*---------------------------*
- *        Main Setup         *
- *---------------------------*/
-
 document.addEventListener('DOMContentLoaded', async () => {
   // Get the active tab and displayed message.
   const [tab] = await messenger.tabs.query({
@@ -47,21 +44,33 @@ document.addEventListener('DOMContentLoaded', async () => {
   console_log('Message', message.id);
 
   // Cache DOM element references.
-  const statusText = document.getElementById('statusText');
-  const deleteOneButton = document.getElementById('deleteOneButton');
-  const deleteAllNameAddrButton = document.getElementById(
-    'deleteAllNameAddrButton'
+  const statusText = /** @type {HTMLElement} */ (
+    document.getElementById('statusText')
   );
-  const deleteAllAddrButton = document.getElementById('deleteAllAddrButton');
-  const deleteAllDomainButton = document.getElementById(
-    'deleteAllDomainButton'
+  const deleteOneButton = /** @type {HTMLElement} */ (
+    document.getElementById('deleteOneButton')
+  );
+  const deleteAllNameAddrButton = /** @type {HTMLElement} */ (
+    document.getElementById('deleteAllNameAddrButton')
+  );
+  const deleteAllAddrButton = /** @type {HTMLElement} */ (
+    document.getElementById('deleteAllAddrButton')
+  );
+  const deleteAllDomainButton = /** @type {HTMLElement} */ (
+    document.getElementById('deleteAllDomainButton')
   );
 
   // Parse the message author to extract name, sender, and domain.
   const author = message.author;
   console_log('Author:', author);
 
-  let name, sender, domain;
+  /** @type {string} */
+  let name = '';
+  /** @type {string} */
+  let sender = '';
+  /** @type {string} */
+  let domain = '';
+
   const addressRegex = new RegExp(
     '^("?([^"]+)"?\\s+)?<?([\\w._%+-]+)@([\\w.-]+\\.[a-zA-Z]{2,})>?$'
   );
@@ -130,37 +139,162 @@ document.addEventListener('DOMContentLoaded', async () => {
  *    Delete Functionality   *
  *---------------------------*/
 
+const SCOPE_CURRENT_FOLDER = 'currentFolder';
+const SCOPE_CURRENT_ACCOUNT = 'currentAccount';
+const SCOPE_ALL_FOLDERS = 'allFolders';
+
+/**
+ * Determines the selected scope from radio inputs and whether to include Trash/Spam.
+ * @returns {{selectedScope: string, includeTrash: boolean, includeSpam: boolean}} The selected scope and option flag.
+ */
+function getSelectedScope() {
+  // Determine which radio is checked
+  const scopeOptions = /** @type {NodeListOf<HTMLInputElement>} */ (
+    document.getElementsByName('scope')
+  );
+  let selectedScope = '';
+
+  scopeOptions.forEach((option) => {
+    if (option.checked) {
+      selectedScope = option.value;
+    }
+  });
+
+  // Select the checkboxes for including Trash & Spam options
+  const includeTrashAccountCheckbox = /** @type {HTMLInputElement} */ (
+    document.getElementById('includeTrashAccount')
+  );
+  const includeTrashAllCheckbox = /** @type {HTMLInputElement} */ (
+    document.getElementById('includeTrashAll')
+  );
+  const includeSpamAccountCheckbox = /** @type {HTMLInputElement} */ (
+    document.getElementById('includeSpamAccount')
+  );
+  const includeSpamAllCheckbox = /** @type {HTMLInputElement} */ (
+    document.getElementById('includeSpamAll')
+  );
+
+  // Based on the selected scope, check if Trash & Spam should be included
+  let includeTrash = false;
+  let includeSpam = false;
+
+  if (selectedScope === SCOPE_CURRENT_ACCOUNT) {
+    includeTrash = includeTrashAccountCheckbox.checked;
+    includeSpam = includeSpamAccountCheckbox.checked;
+  } else if (selectedScope === SCOPE_ALL_FOLDERS) {
+    includeTrash = includeTrashAllCheckbox.checked;
+    includeSpam = includeSpamAllCheckbox.checked;
+  }
+
+  return { selectedScope, includeTrash, includeSpam };
+}
+
+/**
+ * @param {messenger.folders.MailFolder []} folders
+ * @param {boolean} includeTrash
+ * @param {boolean} includeSpam
+ * @returns {messenger.folders.MailFolder []}
+ */
+function filterFolders(folders, includeTrash, includeSpam) {
+  return folders.filter(
+    (folder) =>
+      (includeTrash || folder.type !== 'trash') &&
+      (includeSpam || folder.type !== 'junk')
+  );
+}
+
+/**
+ * Gets the selected folders based on the current scope.
+ * @param {messenger.messages.MessageHeader} message - The message object.
+ * @returns {Promise<string[]>} A promise that resolves to an array of folder IDs.
+ */
+async function getSelectedFolders(message) {
+  const { selectedScope, includeTrash, includeSpam } = getSelectedScope();
+
+  console_log('Selected Scope', selectedScope);
+  console_log('Include Trash & Spam', includeTrash);
+  console_log('Include Trash & Spam', includeSpam);
+
+  /** @type {string[]} */
+  let selectedFolders = [];
+
+  if (selectedScope === SCOPE_CURRENT_FOLDER) {
+    selectedFolders.push(message.folder.id);
+  } else if (selectedScope === SCOPE_CURRENT_ACCOUNT) {
+    const identity = await getIdentityForMessage(message);
+    const account = await messenger.accounts.get(identity.accountId);
+    const folders = await messenger.folders.getSubFolders(account);
+    selectedFolders.push(
+      ...filterFolders(folders, includeTrash, includeSpam).map((f) => f.id)
+    );
+  } else if (selectedScope === SCOPE_ALL_FOLDERS) {
+    const accounts = await messenger.accounts.list();
+    for (const account of accounts) {
+      const folders = await messenger.folders.getSubFolders(account);
+      selectedFolders.push(
+        ...filterFolders(folders, includeTrash, includeSpam).map((f) => f.id)
+      );
+    }
+  } else {
+    throw new Error(
+      `[BulkDelete][popup.js] Invalid scope selected: ${selectedScope}`
+    );
+  }
+
+  return selectedFolders;
+}
+
+/**
+ * Retrieves the MailIdentity associated with the given message's folder.
+ * This function iterates over accounts to match identities based on the folder's account ID.
+ * @param {messenger.messages.MessageHeader} messageHeader - The MessageHeader associated with the message.
+ * @returns {Promise<MailIdentity|null>} The MailIdentity if found, otherwise null.
+ */
+async function getIdentityForMessage(messageHeader) {
+  if (messageHeader.folder) {
+    const folder = messageHeader.folder;
+    const accounts = await messenger.accounts.list();
+
+    for (const account of accounts) {
+      for (const identity of account.identities) {
+        if (folder.accountId === account.id) {
+          return identity;
+        }
+      }
+    }
+  }
+  return null; // No matching identity found
+}
+
 /**
  * Generates a function to handle deletion based on input parameters.
- * @param {Object} message - The current message object.
+ * @param {messenger.messages.MessageHeader} message - The current message object.
  * @param {HTMLElement} statusText - The status element to update.
  * @param {string} type - The type of delete operation.
  * @param {string} name - Extracted name (if available).
  * @param {string} sender - Extracted sender email (if available).
  * @param {string} domain - Extracted domain (if available).
- * @returns {Function} Function to execute the delete operation.
+ * @returns {() => Promise<void>} Function to execute the delete operation.
  */
 function getDeleteFunc(message, statusText, type, name, sender, domain) {
   return async () => {
     try {
       // Build the deletion criteria object.
-      const message_obj = { messageId: message.id, delete: true };
+      /** @type {DeleteCriteria} */
+      const message_obj = { messageId: message.id };
 
-      switch (type) {
-        case 'deleteAllNameAddrButton':
-          message_obj.name = name;
-        // fall through to include sender and domain
-        case 'deleteAllAddrButton':
-          message_obj.sender = sender;
-        // fall through to include domain
-        case 'deleteAllDomainButton':
-          message_obj.domain = domain;
-          break;
-        case 'deleteOneButton':
-          // No extra criteria for a single message.
-          break;
-        default:
-          break;
+      // Note: getSelectedFolders returns a Promise so we assign the promise itself.
+      message_obj.folders = await getSelectedFolders(message);
+
+      if (type === 'deleteAllNameAddrButton') {
+        message_obj.name = name;
+        message_obj.sender = sender;
+        message_obj.domain = domain;
+      } else if (type === 'deleteAllAddrButton') {
+        message_obj.sender = sender;
+        message_obj.domain = domain;
+      } else if (type === 'deleteAllDomainButton') {
+        message_obj.domain = domain;
       }
 
       statusText.textContent = messenger.i18n.getMessage('statusTextDeleting');
@@ -187,8 +321,8 @@ function getDeleteFunc(message, statusText, type, name, sender, domain) {
 
 /**
  * Handles the deletion of messages based on provided criteria.
- * @param {object} messageFromPopup - The deletion criteria.
- * @returns {Promise<object>} Response indicating deletion result.
+ * @param {DeleteCriteria} messageFromPopup - The deletion criteria.
+ * @returns {Promise<{response: string, count?: number, error?: string}>} Response indicating deletion result.
  */
 async function handleDelete(messageFromPopup) {
   console_log('Deletion criteria:', messageFromPopup);
@@ -211,12 +345,13 @@ async function handleDelete(messageFromPopup) {
 
 /**
  * Collects message IDs to delete based on provided criteria.
- * @param {object} messageFromPopup - The deletion criteria.
- * @returns {Promise<Array<number>>} Array of message IDs.
+ * @param {DeleteCriteria} messageFromPopup - The deletion criteria.
+ * @returns {Promise<messenger.messages.MessageId[]>} Array of message IDs.
  */
 async function collectMessageIdsToDelete(messageFromPopup) {
+  /** @type {number[]} */
   const messageIds = [];
-  const { name, sender, domain, messageId } = messageFromPopup;
+  const { name, sender, domain, messageId, folders } = messageFromPopup;
 
   if (name && sender && domain) {
     // Delete all messages matching full name and email.
@@ -233,7 +368,9 @@ async function collectMessageIdsToDelete(messageFromPopup) {
       })
     );
     for await (let message of messages) {
-      messageIds.push(message.id);
+      if (folders.includes(message.folder.id)) {
+        messageIds.push(message.id);
+      }
     }
   } else if (sender && domain) {
     // Delete all messages from the sender.
@@ -249,14 +386,16 @@ async function collectMessageIdsToDelete(messageFromPopup) {
       })
     );
     for await (let message of messages) {
-      messageIds.push(message.id);
+      if (folders.includes(message.folder.id)) {
+        messageIds.push(message.id);
+      }
     }
   } else if (domain) {
     // Delete all messages from the domain.
     const formattedDomain = domain.trim().toLowerCase();
     const atDomain = '@' + formattedDomain;
     console_log('Selecting messages from domain:', formattedDomain);
-    const messages = getAllMessages();
+    const messages = getAllMessages(folders);
     for await (let message of messages) {
       if (message.author.trim().toLowerCase().includes(atDomain)) {
         messageIds.push(message.id);
@@ -277,8 +416,8 @@ async function collectMessageIdsToDelete(messageFromPopup) {
 
 /**
  * Async generator to yield messages from a paginated list.
- * @param {Promise<object>} list - A paginated list of messages.
- * @returns {AsyncGenerator<object>} Yields message objects.
+ * @param {Promise<messenger.messages.MessageList>} list - A paginated list of messages.
+ * @returns {AsyncGenerator<messenger.messages.MessageHeader>} Yields message objects.
  */
 async function* getMessages(list) {
   let page = await list;
@@ -294,15 +433,21 @@ async function* getMessages(list) {
 }
 
 /**
- * Async generator to yield messages from all folders across accounts.
- * @returns {AsyncGenerator<object>} Yields messages from all folders.
+ * Async generator to yield messages from all folders indicated.
+ * @param {messenger.folders.MailFolderId[]} folderIds - Array of folder IDs.
+ * @returns {AsyncGenerator<messenger.messages.MessageHeader>} Yields messages from all folders.
  */
-async function* getAllMessages() {
-  const accounts = await messenger.accounts.list();
-  for (let account of accounts) {
-    const folders = await messenger.folders.getSubFolders(account);
-    for (let inbox of folders) {
-      yield* getMessages(messenger.messages.list(inbox));
-    }
+async function* getAllMessages(folderIds) {
+  for (let folderid of folderIds) {
+    yield* getMessages(messenger.messages.list(folderid));
   }
 }
+
+/**
+ * @typedef {Object} DeleteCriteria
+ * @property {number} messageId - The ID of the message.
+ * @property {messenger.folders.MailFolderId[]} [folders] - An array of folder IDs.
+ * @property {string} [name] - The name associated with the message.
+ * @property {string} [sender] - The sender's email address.
+ * @property {string} [domain] - The domain extracted from the sender's email.
+ */

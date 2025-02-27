@@ -46,5 +46,29 @@
   "statusTextDeleteError": {
     "message": "Failed to delete email(s).",
     "description": "Status text when email deletion fails"
+  },
+  "deletionScope": {
+    "message": "Deletion Scope",
+    "description": "Title for the section where users select the scope of deletion."
+  },
+  "currentFolderLabel": {
+    "message": "Current Folder",
+    "description": "Label for the deletion scope option that restricts deletion to the current folder."
+  },
+  "currentAccountLabel": {
+    "message": "Current Account",
+    "description": "Label for the deletion scope option that restricts deletion to the current account."
+  },
+  "allFoldersLabel": {
+    "message": "All Folders",
+    "description": "Label for the deletion scope option that deletes messages from all folders."
+  },
+  "includeTrash": {
+    "message": "Include Trash",
+    "description": "Checkbox label indicating whether to include Trash folders in the deletion process."
+  },
+  "includeSpam": {
+    "message": "Include Spam",
+    "description": "Checkbox label indicating whether to include Spam folders in the deletion process."
   }
 }

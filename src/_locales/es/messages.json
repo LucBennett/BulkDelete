@@ -1,11 +1,11 @@
 {
   "extensionName": {
     "message": "EliminaciónMasiva",
-    "description": "El nombre de la extensión de correo de Thunderbird"
+    "description": "El nombre de la extensión de Thunderbird MailExtension"
   },
   "extensionDescription": {
     "message": "Extensión de Thunderbird para eliminar correos electrónicos en masa.",
-    "description": "La descripción de la extensión de correo de Thunderbird"
+    "description": "La descripción de la extensión de Thunderbird MailExtension"
   },
   "deleteOneButton": {
     "message": "Solo este",
@@ -25,10 +25,10 @@
   },
   "statusTextWorking": {
     "message": "Trabajando...",
-    "description": "Texto de estado para el estado en proceso"
+    "description": "Texto de estado para el estado de trabajo"
   },
   "statusTextDone": {
-    "message": "Hecho",
+    "message": "Listo",
     "description": "Texto de estado para el estado completado"
   },
   "statusTextError": {
@@ -45,6 +45,30 @@
   },
   "statusTextDeleteError": {
     "message": "No se pudo eliminar el/los correo(s).",
-    "description": "Texto de estado cuando falla la eliminación de correos electrónicos"
+    "description": "Texto de estado cuando la eliminación de correos electrónicos falla"
+  },
+  "deletionScope": {
+    "message": "Ámbito de eliminación",
+    "description": "Título de la sección donde los usuarios seleccionan el alcance de la eliminación."
+  },
+  "currentFolderLabel": {
+    "message": "Carpeta actual",
+    "description": "Etiqueta para la opción de alcance de eliminación que restringe la eliminación a la carpeta actual."
+  },
+  "currentAccountLabel": {
+    "message": "Cuenta actual",
+    "description": "Etiqueta para la opción de alcance de eliminación que restringe la eliminación a la cuenta actual."
+  },
+  "allFoldersLabel": {
+    "message": "Todas las carpetas",
+    "description": "Etiqueta para la opción de alcance de eliminación que elimina mensajes de todas las carpetas."
+  },
+  "includeTrash": {
+    "message": "Incluir Papelera",
+    "description": "Etiqueta de casilla de verificación que indica si se deben incluir las carpetas de la Papelera en el proceso de eliminación."
+  },
+  "includeSpam": {
+    "message": "Incluir Spam",
+    "description": "Etiqueta de casilla de verificación que indica si se deben incluir las carpetas de Spam en el proceso de eliminación."
   }
 }

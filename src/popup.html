@@ -21,6 +21,125 @@
       </button>
     </div>
 
+    <details class="scope-section">
+      <h3 data-i18n="deletionScope">Deletion Scope</h3>
+      <form id="scopeForm">
+        <table>
+          <tr>
+            <td>
+              <input
+                type="radio"
+                id="currentFolder"
+                name="scope"
+                value="currentFolder"
+                checked
+              />
+            </td>
+            <td>
+              <label for="currentFolder" data-i18n="currentFolderLabel"
+                >Current Folder</label
+              >
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>
+              <input
+                type="radio"
+                id="currentAccount"
+                name="scope"
+                value="currentAccount"
+              />
+            </td>
+            <td>
+              <label for="currentAccount" data-i18n="currentAccountLabel"
+                >Current Account</label
+              >
+            </td>
+            <td>
+              <input
+                type="checkbox"
+                id="includeSpamAccount"
+                name="includeSpamAccount"
+              />
+            </td>
+            <td>
+              <label
+                class="toggle-label"
+                for="includeSpamAccount"
+                data-i18n="includeSpam"
+              >
+                Include Spam
+              </label>
+            </td>
+            <td>
+              <input
+                type="checkbox"
+                id="includeTrashAccount"
+                name="includeTrashAccount"
+              />
+            </td>
+            <td>
+              <label
+                class="toggle-label"
+                for="includeTrashAccount"
+                data-i18n="includeTrash"
+              >
+                Include Trash
+              </label>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input
+                type="radio"
+                id="allFolders"
+                name="scope"
+                value="allFolders"
+              />
+            </td>
+            <td>
+              <label for="allFolders" data-i18n="allFoldersLabel"
+                >All Folders</label
+              >
+            </td>
+            <td>
+              <input
+                type="checkbox"
+                id="includeSpamAll"
+                name="includeSpamAll"
+              />
+            </td>
+            <td>
+              <label
+                class="toggle-label"
+                for="includeSpamAll"
+                data-i18n="includeSpam"
+              >
+                Include Spam
+              </label>
+            </td>
+            <td>
+              <input
+                type="checkbox"
+                id="includeTrashAll"
+                name="includeTrashAll"
+              />
+            </td>
+            <td>
+              <label
+                class="toggle-label"
+                for="includeTrashAll"
+                data-i18n="includeTrash"
+              >
+                Include Trash
+              </label>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </details>
+
     <h4 id="statusText" role="status"></h4>
 
     <script src="i18n.js"></script>

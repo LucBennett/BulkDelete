@@ -1,11 +1,11 @@
 {
   "extensionName": {
-    "message": "BulkDelete",
-    "description": "Der Name der Thunderbird-Mailerweiterung"
+    "message": "Massenlöschung",
+    "description": "Der Name der Thunderbird MailExtension"
   },
   "extensionDescription": {
     "message": "Thunderbird-Erweiterung zum massenhaften Löschen von E-Mails.",
-    "description": "Die Beschreibung der Thunderbird-Mailerweiterung"
+    "description": "Die Beschreibung der Thunderbird MailExtension"
   },
   "deleteOneButton": {
     "message": "Nur diese",
@@ -16,35 +16,59 @@
     "description": "Schaltfläche zum Löschen aller E-Mails von einem bestimmten Absender"
   },
   "deleteAllAddrButton": {
-    "message": "Alle von Adresse:",
+    "message": "Alle von der Adresse:",
     "description": "Schaltfläche zum Löschen aller E-Mails von einer bestimmten Adresse"
   },
   "deleteAllDomainButton": {
-    "message": "Alle von Domain:",
+    "message": "Alle von der Domain:",
     "description": "Schaltfläche zum Löschen aller E-Mails von einer Domain"
   },
   "statusTextWorking": {
-    "message": "Arbeitet...",
-    "description": "Statusmeldung für den Arbeitszustand"
+    "message": "Wird verarbeitet...",
+    "description": "Statusmeldung für den Arbeitsprozess"
   },
   "statusTextDone": {
     "message": "Fertig",
-    "description": "Statusmeldung für den abgeschlossenen Zustand"
+    "description": "Statusmeldung für den abgeschlossenen Prozess"
   },
   "statusTextError": {
     "message": "Fehler",
-    "description": "Statusmeldung für den Fehlerzustand"
+    "description": "Statusmeldung für einen Fehler"
   },
   "statusTextDeleting": {
     "message": "E-Mail(s) werden gelöscht...",
-    "description": "Statusmeldung während des Löschens von E-Mails"
+    "description": "Statusmeldung während des Löschvorgangs"
   },
   "statusTextDeleteSuccess": {
     "message": "E-Mail(s) erfolgreich gelöscht.",
-    "description": "Statusmeldung für erfolgreiches Löschen von E-Mails"
+    "description": "Statusmeldung für eine erfolgreiche E-Mail-Löschung"
   },
   "statusTextDeleteError": {
     "message": "Löschen der E-Mail(s) fehlgeschlagen.",
-    "description": "Statusmeldung, wenn das Löschen von E-Mails fehlschlägt"
+    "description": "Statusmeldung, wenn das Löschen der E-Mail(s) fehlschlägt"
+  },
+  "deletionScope": {
+    "message": "Löschbereich",
+    "description": "Titel des Abschnitts, in dem Benutzer den Löschbereich auswählen."
+  },
+  "currentFolderLabel": {
+    "message": "Aktueller Ordner",
+    "description": "Bezeichnung für die Option, die das Löschen auf den aktuellen Ordner beschränkt."
+  },
+  "currentAccountLabel": {
+    "message": "Aktuelles Konto",
+    "description": "Bezeichnung für die Option, die das Löschen auf das aktuelle Konto beschränkt."
+  },
+  "allFoldersLabel": {
+    "message": "Alle Ordner",
+    "description": "Bezeichnung für die Option, die Nachrichten aus allen Ordnern löscht."
+  },
+  "includeTrash": {
+    "message": "Papierkorb einbeziehen",
+    "description": "Checkbox-Beschriftung, die angibt, ob Papierkorb-Ordner in den Löschvorgang einbezogen werden sollen."
+  },
+  "includeSpam": {
+    "message": "Spam einbeziehen",
+    "description": "Checkbox-Beschriftung, die angibt, ob Spam-Ordner in den Löschvorgang einbezogen werden sollen."
   }
 }
