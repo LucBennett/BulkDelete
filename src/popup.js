@@ -438,8 +438,8 @@ async function* getMessages(list) {
  * @returns {AsyncGenerator<messenger.messages.MessageHeader>} Yields messages from all folders.
  */
 async function* getAllMessages(folderIds) {
-  for (let folderid of folderIds) {
-    yield* getMessages(messenger.messages.list(folderid));
+  for (let folderId of folderIds) {
+    yield* getMessages(messenger.messages.list(folderId));
   }
 }
 
